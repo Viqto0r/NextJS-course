@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import cn from 'classnames'
-import { IPTagProps } from './PTag.props'
-import styles from './PTag.module.css'
+import { IPProps } from './P.props'
+import styles from './P.module.css'
 
-export const PTag: FC<IPTagProps> = ({
+export const P: FC<IPProps> = ({
   size = 'm',
   children,
   className,

@@ -1,4 +1,4 @@
-export { HTag } from './HTag/HTag'
+export { H } from './H/H'
 export { Button } from './Button/Button'
-export { PTag } from './PTag/PTag'
+export { P } from './P/P'
 export { Tag } from './Tag/Tag'
