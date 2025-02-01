@@ -3,7 +3,7 @@
   "plugins": ["stylelint-order"],
   "rules": {
     "indentation": 2,
-    "color-hex-case": "upper",
-    "font-family-name-quotes": null
+    "font-family-name-quotes": null,
+    "string-quotes": "single"
   }
 }
