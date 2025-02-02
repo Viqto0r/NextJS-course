@@ -4,6 +4,7 @@
   "rules": {
     "indentation": 2,
     "font-family-name-quotes": null,
-    "string-quotes": "single"
+    "string-quotes": "single",
+    "declaration-block-no-redundant-longhand-properties": null
   }
 }
