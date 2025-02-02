@@ -4,7 +4,7 @@ import { Header } from './Header/Header'
 import { Sidebar } from './Sidebar/Sidebar'
 import { Footer } from './Footer/Footer'
 
-export const Layout: FC<ILayoutProps> = ({ children }) => {
+const Layout: FC<ILayoutProps> = ({ children }) => {
   return (
     <>
       <Header />
@@ -15,4 +15,16 @@ export const Layout: FC<ILayoutProps> = ({ children }) => {
       <Footer />
     </>
   )
+}
+
+export const withLayout = <T extends Record<string, unknown>>(
+  Component: FC<T>
+) => {
+  return (props: T): JSX.Element => {
+    return (
+      <Layout>
+        <Component {...props} />
+      </Layout>
+    )
+  }
 }
