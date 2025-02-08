@@ -8,6 +8,7 @@ import BooksIcon from './icons/books.svg'
 import ProductsIcon from './icons/products.svg'
 import { ETopLevelCategory } from '../../interfaces/page.interface'
 import cn from 'classnames'
+import Link from 'next/link'
 
 const firstLevelMenu: IFirstLevelMenuItem[] = [
   {
@@ -45,16 +46,18 @@ export const Menu: FC = () => {
 
       return (
         <div key={firstLevelMenuItem.id}>
-          <a href={`/${firstLevelMenuItem.route}`}>
-            <div
-              className={cn(styles.firstLevel, {
-                [styles.firstLevelActive]: firstLevelActive,
-              })}
-            >
-              {firstLevelMenuItem.icon}
-              <span>{firstLevelMenuItem.name}</span>
-            </div>
-          </a>
+          <Link href={`/${firstLevelMenuItem.route}`}>
+            <a>
+              <div
+                className={cn(styles.firstLevel, {
+                  [styles.firstLevelActive]: firstLevelActive,
+                })}
+              >
+                {firstLevelMenuItem.icon}
+                <span>{firstLevelMenuItem.name}</span>
+              </div>
+            </a>
+          </Link>
           {firstLevelActive && buildSecondLevel(firstLevelMenuItem)}
         </div>
       )
@@ -84,13 +87,16 @@ export const Menu: FC = () => {
 
   const buildThirdLevel = (pages: IPageItem[], route: string) => {
     return pages.map((page) => (
-      <a
-        href={`/${route}/${page.alias}`}
-        key={page.alias}
-        className={cn(styles.thirdLevel, { [styles.thirdLevelActive]: false })}
-      >
-        {page.category}
-      </a>
+      <Link href={`/${route}/${page.alias}`}>
+        <a
+          key={page.alias}
+          className={cn(styles.thirdLevel, {
+            [styles.thirdLevelActive]: false,
+          })}
+        >
+          {page.category}
+        </a>
+      </Link>
     ))
   }
 
