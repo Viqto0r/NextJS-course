@@ -2,41 +2,10 @@ import { FC, useContext } from 'react'
 import styles from './Menu.module.css'
 import { AppContext } from '../../context/app.context'
 import { IFirstLevelMenuItem, IPageItem } from '../../interfaces/menu.interface'
-import CoursesIcon from './icons/courses.svg'
-import ServicesIcon from './icons/services.svg'
-import BooksIcon from './icons/books.svg'
-import ProductsIcon from './icons/products.svg'
-import { ETopLevelCategory } from '../../interfaces/page.interface'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
-const firstLevelMenu: IFirstLevelMenuItem[] = [
-  {
-    route: 'courses',
-    name: 'Курсы',
-    icon: <CoursesIcon />,
-    id: ETopLevelCategory.Courses,
-  },
-  {
-    route: 'services',
-    name: 'Сервисы',
-    icon: <ServicesIcon />,
-    id: ETopLevelCategory.Services,
-  },
-  {
-    route: 'books',
-    name: 'Книги',
-    icon: <BooksIcon />,
-    id: ETopLevelCategory.Books,
-  },
-  {
-    route: 'products',
-    name: 'Продукты',
-    icon: <ProductsIcon />,
-    id: ETopLevelCategory.Products,
-  },
-]
+import { firstLevelMenu } from '../../helpers/helpers'
 
 export const Menu: FC = () => {
   const { menu, setMenu, firstCategory } = useContext(AppContext)
@@ -120,9 +89,8 @@ export const Menu: FC = () => {
       const isActive = href == router.asPath
 
       return (
-        <Link href={href}>
+        <Link href={href} key={page.alias}>
           <a
-            key={page.alias}
             className={cn(styles.thirdLevel, {
               [styles.thirdLevelActive]: isActive,
             })}
