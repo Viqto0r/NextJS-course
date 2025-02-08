@@ -15,7 +15,7 @@ export interface IMenuItem {
   pages: IPageItem[]
 }
 
-export interface FirstLevelMenuItem {
+export interface IFirstLevelMenuItem {
   route: string
   name: string
   icon: JSX.Element

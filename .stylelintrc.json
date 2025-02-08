@@ -5,6 +5,7 @@
     "indentation": 2,
     "font-family-name-quotes": null,
     "string-quotes": "single",
-    "declaration-block-no-redundant-longhand-properties": null
+    "declaration-block-no-redundant-longhand-properties": null,
+    "selector-class-pattern": null
   }
 }
