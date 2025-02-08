@@ -9,8 +9,9 @@ import {
 import { ParsedUrlQuery } from 'node:querystring'
 import { IProductModel } from '../../interfaces/product.interface'
 import { firstLevelMenu } from '../../helpers/helpers'
+import { TopPageComponent } from '../../page-components'
 
-interface ICourseProps extends Record<string, unknown> {
+interface ITopPageProps extends Record<string, unknown> {
   menu: IMenuItem[]
   firstCategory: ETopLevelCategory
   page: ITopPageModel
@@ -37,7 +38,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps<ICourseProps> = async ({
+export const getStaticProps: GetStaticProps<ITopPageProps> = async ({
   params,
 }: GetStaticPropsContext<ParsedUrlQuery>) => {
   if (!params) {
@@ -97,8 +98,18 @@ export const getStaticProps: GetStaticProps<ICourseProps> = async ({
   }
 }
 
-function Course({ menu, page, products }: ICourseProps): JSX.Element {
-  return <>{products?.length}</>
+function TopPage({
+  firstCategory,
+  page,
+  products,
+}: ITopPageProps): JSX.Element {
+  return (
+    <TopPageComponent
+      firstCategory={firstCategory}
+      page={page}
+      products={products}
+    />
+  )
 }
 
-export default withLayout(Course)
+export default withLayout(TopPage)
