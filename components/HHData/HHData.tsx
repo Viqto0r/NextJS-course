@@ -4,6 +4,7 @@ import { IHHDataProps } from './HHData.props'
 import styles from './HHData.module.css'
 import { Card } from '../Card/Card'
 import RateIcon from './rate.svg'
+import { getPriceRu } from '../../helpers/helpers'
 
 const getRate = (fillCount: number) => (
   <div className={styles.rate}>
@@ -28,17 +29,17 @@ export const HHData: FC<IHHDataProps> = ({
       <Card className={styles.salary}>
         <div>
           <div className={styles.title}>Начальный</div>
-          <div className={styles.salaryValue}>{juniorSalary}</div>
+          <div className={styles.salaryValue}>{getPriceRu(juniorSalary)}</div>
           {getRate(1)}
         </div>
         <div>
           <div className={styles.title}>Средний</div>
-          <div className={styles.salaryValue}>{middleSalary}</div>
+          <div className={styles.salaryValue}>{getPriceRu(middleSalary)}</div>
           {getRate(2)}
         </div>
         <div>
           <div className={styles.title}>Профессионал</div>
-          <div className={styles.salaryValue}>{seniorSalary}</div>
+          <div className={styles.salaryValue}>{getPriceRu(seniorSalary)}</div>
           {getRate(3)}
         </div>
       </Card>

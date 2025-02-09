@@ -8,7 +8,7 @@ import cn from 'classnames'
 export const Sidebar: FC<ISidebarProps> = ({ className, ...otherProps }) => {
   return (
     <aside className={cn(className, styles.sidebar)} {...otherProps}>
-      <Logo className={styles.logo} />
+      <Logo />
       <div>Поиск</div>
       <Menu />
     </aside>

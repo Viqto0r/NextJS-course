@@ -1,8 +1,7 @@
 import { FC } from 'react'
-import cn from 'classnames'
 import styles from './TopPageComponent.module.css'
 import { ITopPageComponentProps } from './TopPageComponent.props'
-import { H, Tag } from '../../components'
+import { Advantages, H, P, Tag } from '../../components'
 import { HHData } from '../../components/HHData/HHData'
 import { ETopLevelCategory } from '../../interfaces/page.interface'
 
@@ -12,7 +11,7 @@ export const TopPageComponent: FC<ITopPageComponentProps> = ({
   products,
 }) => {
   return (
-    <div className={styles.wrapper}>
+    <div>
       <div className={styles.title}>
         <H tag="h1">{page.title}</H>
         {products && <Tag color="gray">{products.length}</Tag>}
@@ -30,6 +29,21 @@ export const TopPageComponent: FC<ITopPageComponentProps> = ({
       {firstCategory === ETopLevelCategory.Courses && page.hh && (
         <HHData {...page.hh} />
       )}
+      {!!page.advantages?.length && (
+        <div className={styles.advantages}>
+          <H tag="h2">Преимущества</H>
+          <Advantages advantages={page.advantages} />
+        </div>
+      )}
+      {page.seoText && <P className={styles.seo}>{page.seoText}</P>}
+      <H tag="h2">Получаемые навыки</H>
+      <div className={styles.tags}>
+        {page.tags.map((tag) => (
+          <Tag key={tag} className={styles.tag}>
+            {tag}
+          </Tag>
+        ))}
+      </div>
     </div>
   )
 }
