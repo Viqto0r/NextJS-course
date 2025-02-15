@@ -1,0 +1,172 @@
+/* Grid - start */
+.product {
+  display: grid;
+  grid-template-columns:
+    [start]
+    70px [logoend]
+    30px [titlestart]
+    calc(50% - 100px) [middle]
+    1fr [pricestart]
+    auto [priceend]
+    40px [creditstart]
+    auto [creditend]
+    40px [ratestart]
+    auto [end];
+
+  margin-bottom: 30px;
+  padding: 30px;
+}
+
+.logo {
+  grid-column: start / logoend;
+  grid-row: 1 / span 2;
+}
+
+.title,
+.tags {
+  grid-column: titlestart / middle;
+}
+
+.price,
+.priceTitle {
+  grid-column: pricestart / priceend;
+}
+
+.credit,
+.creditTitle {
+  grid-column: creditstart / creditend;
+}
+
+.rating,
+.rateTitle {
+  grid-column: ratestart / end;
+}
+
+.divider,
+.description,
+.actions {
+  grid-column: start / end;
+}
+
+.features {
+  grid-column: start / middle;
+
+  padding-right: 60px;
+}
+
+.advantagesBlock {
+  grid-column: middle / end;
+}
+
+/* Grid - end */
+
+.logo img {
+  border-radius: 5px;
+}
+
+.title {
+  align-self: flex-end;
+
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+}
+
+.price,
+.credit {
+  align-self: flex-end;
+
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 27px;
+}
+
+.credit .month {
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.rating {
+  align-self: flex-end;
+}
+
+.description {
+  margin-bottom: 15px;
+
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.priceTitle,
+.creditTitle,
+.rateTitle {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 19px;
+}
+
+.discount {
+  margin-left: 8px;
+}
+
+.tags {
+  display: flex;
+  gap: 5px;
+
+  margin-top: 7px;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors */
+.advantagesBlock {
+  display: grid;
+  gap: 20px;
+
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.advantages {
+  display: grid;
+  gap: 5px;
+
+  padding-left: 15px;
+
+  border-left: 2px solid var(--green);
+}
+
+.advantagesTitle {
+  font-weight: 700;
+}
+
+.disadvantages {
+  padding-left: 15px;
+
+  border-left: 2px solid var(--red);
+}
+
+.characteristic {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+
+  font-size: 16px;
+  line-height: 32px;
+}
+
+.characteristicName {
+  font-weight: 700;
+}
+
+.characteristicDots {
+  align-self: center;
+
+  height: 1px;
+  margin-top: 10px;
+
+  border-bottom: 1px dashed #c4c4c4;
+}

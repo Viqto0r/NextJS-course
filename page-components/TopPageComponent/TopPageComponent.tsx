@@ -1,7 +1,7 @@
 import { FC, useReducer } from 'react'
 import styles from './TopPageComponent.module.css'
 import { ITopPageComponentProps } from './TopPageComponent.props'
-import { Advantages, H, P, Sort, Tag } from '../../components'
+import { Advantages, H, P, Product, Sort, Tag } from '../../components'
 import { HHData } from '../../components/HHData/HHData'
 import { ETopLevelCategory } from '../../interfaces/page.interface'
 import { ESortType } from '../../components/Sort/Sort.props'
@@ -31,7 +31,7 @@ export const TopPageComponent: FC<ITopPageComponentProps> = ({
       </div>
       <div>
         {sortedProducts?.map((product) => (
-          <div key={product._id}>{product.title}</div>
+          <Product key={product._id} product={product} />
         ))}
       </div>
       <div className={styles.hhTitle}>

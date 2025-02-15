@@ -37,3 +37,14 @@ export const getPriceRu = (price: number): string =>
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
     .concat(' ₽')
+
+export const getPluralForm = (
+  number: number,
+  titles: [string, string, string]
+): string => {
+  const cases = [2, 0, 1, 1, 1, 2]
+  const caseIndex = number % 10 < 5 ? number % 10 : 5
+  const index = number % 100 > 4 && number % 100 < 20 ? 2 : cases[caseIndex]
+
+  return titles[index]
+}
