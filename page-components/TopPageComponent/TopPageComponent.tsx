@@ -35,7 +35,12 @@ export const TopPageComponent: FC<ITopPageComponentProps> = ({
           <Advantages advantages={page.advantages} />
         </div>
       )}
-      {page.seoText && <P className={styles.seo}>{page.seoText}</P>}
+      {page.seoText && (
+        <div
+          className={styles.seo}
+          dangerouslySetInnerHTML={{ __html: page.seoText }}
+        />
+      )}
       <H tag="h2">Получаемые навыки</H>
       <div className={styles.tags}>
         {page.tags.map((tag) => (
