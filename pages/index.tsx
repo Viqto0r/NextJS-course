@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, H, P, Rating, Tag } from '../components'
+import { Button, H, Input, P, Rating, Tag } from '../components'
 import { withLayout } from '../layout/Layout'
 import { GetStaticProps } from 'next'
 import axios from 'axios'
@@ -41,7 +41,9 @@ function Home({ menu }: IHomeProps): JSX.Element {
       <P size="l">Большой</P>
       <P>Средний</P>
       <P size="s">Маленький</P>
-      <Tag size="s">Ghost</Tag>
+      <Tag size="s" color="ghost">
+        Ghost
+      </Tag>
       <Tag size="s" color="red" href="https://www.google.com">
         Red
       </Tag>
@@ -50,6 +52,7 @@ function Home({ menu }: IHomeProps): JSX.Element {
       </Tag>
       <Tag color="primary">Primary</Tag>
       <Rating rating={rating} isEditable setRating={setRating} />
+      <Input placeholder="Test" />
     </>
   )
 }
