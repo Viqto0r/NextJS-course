@@ -59,10 +59,7 @@ export const Product: FC<IProductProps> = (props) => {
               {characteristic.name}
             </span>
             <span className={styles.characteristicDots} />
-            {/*TODO: Удалить класс */}
-            <span className={styles.characteristicValue}>
-              {characteristic.value}
-            </span>
+            <span>{characteristic.value}</span>
           </div>
         ))}
       </div>

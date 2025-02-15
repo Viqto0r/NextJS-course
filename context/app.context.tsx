@@ -1,10 +1,4 @@
-import {
-  createContext,
-  FC,
-  PropsWithChildren,
-  ReactNode,
-  useState,
-} from 'react'
+import { createContext, FC, PropsWithChildren, useState } from 'react'
 import { IMenuItem } from '../interfaces/menu.interface'
 import { ETopLevelCategory } from '../interfaces/page.interface'
 

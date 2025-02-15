@@ -1,7 +1,7 @@
 import { FC, useReducer } from 'react'
 import styles from './TopPageComponent.module.css'
 import { ITopPageComponentProps } from './TopPageComponent.props'
-import { Advantages, H, P, Product, Sort, Tag } from '../../components'
+import { Advantages, H, Product, Sort, Tag } from '../../components'
 import { HHData } from '../../components/HHData/HHData'
 import { ETopLevelCategory } from '../../interfaces/page.interface'
 import { ESortType } from '../../components/Sort/Sort.props'

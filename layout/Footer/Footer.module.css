@@ -2,9 +2,11 @@
   display: grid;
   grid-template-columns: 1fr auto auto;
   gap: 0 40px;
+
   padding: 25px 30px;
-  background-color: var(--primary);
+
   color: white;
+  background-color: var(--primary);
 }
 
 .footer a:hover {
