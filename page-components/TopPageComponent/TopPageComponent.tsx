@@ -1,24 +1,36 @@
-import { FC } from 'react'
+import { FC, useReducer } from 'react'
 import styles from './TopPageComponent.module.css'
 import { ITopPageComponentProps } from './TopPageComponent.props'
-import { Advantages, H, P, Tag } from '../../components'
+import { Advantages, H, P, Sort, Tag } from '../../components'
 import { HHData } from '../../components/HHData/HHData'
 import { ETopLevelCategory } from '../../interfaces/page.interface'
+import { ESortType } from '../../components/Sort/Sort.props'
+import { sortReducer } from './sort.reducer'
 
 export const TopPageComponent: FC<ITopPageComponentProps> = ({
   firstCategory,
   page,
   products,
 }) => {
+  const [{ products: sortedProducts, sort }, dispatchSort] = useReducer(
+    sortReducer,
+    {
+      sort: ESortType.Rating,
+      products,
+    }
+  )
+
+  const setSort = (sortType: ESortType) => dispatchSort({ type: sortType })
+
   return (
     <div>
       <div className={styles.title}>
         <H tag="h1">{page.title}</H>
-        {products && <Tag color="gray">{products.length}</Tag>}
-        <span>Сортировка</span>
+        {sortedProducts && <Tag color="gray">{sortedProducts.length}</Tag>}
+        <Sort sort={sort} setSort={setSort} />
       </div>
       <div>
-        {products?.map((product) => (
+        {sortedProducts?.map((product) => (
           <div key={product._id}>{product.title}</div>
         ))}
       </div>
