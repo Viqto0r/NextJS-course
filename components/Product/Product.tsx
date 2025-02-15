@@ -105,7 +105,10 @@ export const Product: FC<IProductProps> = (props) => {
       >
         {product.reviews.length
           ? product.reviews.map((review) => (
-              <Review review={review} key={review._id} />
+              <>
+                <Review review={review} key={review._id} />
+                <Divider />
+              </>
             ))
           : 'Отзывы отсутствуют'}
       </Card>
