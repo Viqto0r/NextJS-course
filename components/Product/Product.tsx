@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import Image from 'next/image'
 import cn from 'classnames'
 import { IProductProps } from './Product.props'
 import styles from './Product.module.css'
@@ -19,7 +20,7 @@ export const Product: FC<IProductProps> = (props) => {
       color="white"
     >
       <div className={styles.logo}>
-        <img src={product.image} alt={product.title} />
+        <Image src={product.image} alt={product.title} width={70} height={70} />
       </div>
       <div className={styles.title}>{product.title}</div>
       <div className={styles.price}>
@@ -77,7 +78,7 @@ export const Product: FC<IProductProps> = (props) => {
           </div>
         )}
       </div>
-      <Divider className={styles.divider} />
+      <Divider className={cn(styles.divider, styles.divider2)} />
       <div className={styles.actions}>
         <Button appearance="primary">Узнать подробнее</Button>
         <Button appearance="ghost" arrow="right">
