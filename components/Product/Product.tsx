@@ -10,6 +10,7 @@ import { Button } from '../Button/Button'
 import { getPluralForm, getPriceRu } from '../../helpers/helpers'
 import { Divider } from '../Divider/Divider'
 import { Review } from '../Review/Review'
+import { ReviewForm } from '../ReviewForm/ReviewForm'
 
 export const Product: FC<IProductProps> = (props) => {
   const { className, product, ...restProps } = props
@@ -103,14 +104,13 @@ export const Product: FC<IProductProps> = (props) => {
         color="blue"
         className={cn(styles.reviews, { [styles.opened]: isReviewOpened })}
       >
-        {product.reviews.length
-          ? product.reviews.map((review) => (
-              <>
-                <Review review={review} key={review._id} />
-                <Divider />
-              </>
-            ))
-          : 'Отзывы отсутствуют'}
+        {product.reviews.map((review) => (
+          <>
+            <Review review={review} key={review._id} />
+            <Divider />
+          </>
+        ))}
+        <ReviewForm productId={product._id} />
       </Card>
     </>
   )
