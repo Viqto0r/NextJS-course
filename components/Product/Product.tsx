@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, Fragment, useState } from 'react'
 import Image from 'next/image'
 import cn from 'classnames'
 import { IProductProps } from './Product.props'
@@ -105,10 +105,10 @@ export const Product: FC<IProductProps> = (props) => {
         className={cn(styles.reviews, { [styles.opened]: isReviewOpened })}
       >
         {product.reviews.map((review) => (
-          <>
-            <Review review={review} key={review._id} />
+          <div key={review._id}>
+            <Review review={review} />
             <Divider />
-          </>
+          </div>
         ))}
         <ReviewForm productId={product._id} />
       </Card>

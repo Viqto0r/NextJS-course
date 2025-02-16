@@ -1,15 +1,11 @@
-import { FC, KeyboardEvent, useEffect, useState } from 'react'
+import { forwardRef, KeyboardEvent, useEffect, useState } from 'react'
 import cn from 'classnames'
 import { IRatingProps } from './Rating.props'
 import StarIcon from './Star.svg'
 import styles from './Rating.module.css'
 
-export const Rating: FC<IRatingProps> = ({
-  rating,
-  setRating,
-  isEditable = false,
-  ...restProps
-}) => {
+export const Rating = forwardRef<HTMLDivElement, IRatingProps>((props, ref) => {
+  const { rating, setRating, isEditable = false, error, ...restProps } = props
   const [ratingArray, setRatingArray] = useState<JSX.Element[]>(
     new Array(5).fill(<></>)
   )
@@ -19,7 +15,7 @@ export const Rating: FC<IRatingProps> = ({
   }, [rating])
 
   const constructRating = (currentRating: number) => {
-    const updatedArray = ratingArray.map((r: JSX.Element, idx: number) => (
+    const updatedArray = ratingArray.map((_: JSX.Element, idx: number) => (
       <span
         className={cn(styles.star, {
           [styles.filled]: idx < currentRating,
@@ -66,10 +62,17 @@ export const Rating: FC<IRatingProps> = ({
   }
 
   return (
-    <div {...restProps}>
+    <div
+      {...restProps}
+      ref={ref}
+      className={cn(styles.ratingWrapper, { [styles.error]: error })}
+    >
       {ratingArray.map((rating, idx) => (
         <span key={idx}>{rating}</span>
       ))}
+      {error?.message && (
+        <span className={styles.errorMessage}>{error.message}</span>
+      )}
     </div>
   )
-}
+})
