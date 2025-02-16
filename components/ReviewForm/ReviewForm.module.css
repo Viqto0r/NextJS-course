@@ -37,13 +37,16 @@
   gap: 20px;
 }
 
-.success {
+.panel {
   position: relative;
 
   margin-top: 20px;
   padding: 20px;
 
   border-radius: 5px;
+}
+
+.success {
   background-color: var(--green-light);
 }
 
@@ -57,6 +60,14 @@
   right: 15px;
 
   cursor: pointer;
+}
+
+.error {
+  background-color: var(--red-light);
+}
+
+.error .close path {
+  stroke: var(--red);
 }
 
 @media screen and (max-width: 1100px) {

@@ -5,6 +5,7 @@ import { withLayout } from '../../layout/Layout'
 import { IMenuItem } from '../../interfaces/menu.interface'
 import { firstLevelMenu } from '../../helpers/helpers'
 import { ParsedUrlQuery } from 'node:querystring'
+import { API } from '../../helpers/api'
 
 interface ITypeProps extends Record<string, unknown> {
   menu: IMenuItem[]
@@ -41,10 +42,9 @@ export const getStaticProps: GetStaticProps<ITypeProps> = async ({
 
   const firstCategory = firstCategoryItem.id
 
-  const { data: menu } = await axios.post<IMenuItem[]>(
-    process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find',
-    { firstCategory }
-  )
+  const { data: menu } = await axios.post<IMenuItem[]>(API.topPage.find, {
+    firstCategory,
+  })
 
   return {
     props: {
