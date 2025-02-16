@@ -1,22 +1,7 @@
-/* .button {
-  display: inline-block;
-
-  box-sizing: border-box;
-  padding: 10px;
-
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
-
-  border: none;
-  border-radius: 5px;
-
-  font-size: 14px;
-} */
-
 .button {
-  right: 30px;
-  bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   width: 40px;
   height: 40px;
