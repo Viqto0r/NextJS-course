@@ -109,6 +109,10 @@
   line-height: 19px;
 }
 
+.rateTitle a {
+  color: var(--primary);
+}
+
 .discount {
   margin-left: 8px;
 }

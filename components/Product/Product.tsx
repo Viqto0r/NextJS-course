@@ -1,4 +1,4 @@
-import { FC, Fragment, useState } from 'react'
+import { FC, Fragment, useRef, useState } from 'react'
 import Image from 'next/image'
 import cn from 'classnames'
 import { IProductProps } from './Product.props'
@@ -16,14 +16,16 @@ export const Product: FC<IProductProps> = (props) => {
   const { className, product, ...restProps } = props
 
   const [isReviewOpened, setIsReviewOpened] = useState(false)
+  const reviewRef = useRef<HTMLDivElement>(null)
+
+  const scrollToReview = () => {
+    setIsReviewOpened(true)
+    reviewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   return (
-    <>
-      <Card
-        className={cn(styles.product, className)}
-        {...restProps}
-        color="white"
-      >
+    <div className={className} {...restProps}>
+      <Card className={styles.product} color="white">
         <div className={styles.logo}>
           <Image
             src={product.image}
@@ -58,8 +60,10 @@ export const Product: FC<IProductProps> = (props) => {
         <div className={styles.priceTitle}>цена</div>
         <div className={styles.creditTitle}>кредит</div>
         <div className={styles.rateTitle}>
-          {product.reviewCount}{' '}
-          {getPluralForm(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
+          <a href="#ref" onClick={scrollToReview}>
+            {product.reviewCount}{' '}
+            {getPluralForm(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
+          </a>
         </div>
         <Divider className={styles.divider} />
         <div className={styles.description}>{product.description}</div>
@@ -103,6 +107,7 @@ export const Product: FC<IProductProps> = (props) => {
       <Card
         color="blue"
         className={cn(styles.reviews, { [styles.opened]: isReviewOpened })}
+        ref={reviewRef}
       >
         {product.reviews.map((review) => (
           <div key={review._id}>
@@ -112,6 +117,6 @@ export const Product: FC<IProductProps> = (props) => {
         ))}
         <ReviewForm productId={product._id} />
       </Card>
-    </>
+    </div>
   )
 }
