@@ -35,7 +35,7 @@ export const TopPageComponent: FC<ITopPageComponentProps> = ({
       </div>
       <div>
         {sortedProducts?.map((product) => (
-          <Product key={product._id} product={product} />
+          <Product layout key={product._id} product={product} />
         ))}
       </div>
       <div className={styles.hhTitle}>

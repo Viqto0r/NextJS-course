@@ -1,4 +1,4 @@
-import { FC, Fragment, useRef, useState } from 'react'
+import { FC, forwardRef, useRef, useState } from 'react'
 import Image from 'next/image'
 import cn from 'classnames'
 import { IProductProps } from './Product.props'
@@ -11,8 +11,12 @@ import { getPluralForm, getPriceRu } from '../../helpers/helpers'
 import { Divider } from '../Divider/Divider'
 import { Review } from '../Review/Review'
 import { ReviewForm } from '../ReviewForm/ReviewForm'
+import { motion } from 'framer-motion'
 
-export const Product: FC<IProductProps> = (props) => {
+const ProductComponent: FC<IProductProps> = forwardRef<
+  HTMLDivElement,
+  IProductProps
+>((props, ref) => {
   const { className, product, ...restProps } = props
 
   const [isReviewOpened, setIsReviewOpened] = useState(false)
@@ -24,7 +28,7 @@ export const Product: FC<IProductProps> = (props) => {
   }
 
   return (
-    <div className={className} {...restProps}>
+    <div className={className} {...restProps} ref={ref}>
       <Card className={styles.product} color="white">
         <div className={styles.logo}>
           <Image
@@ -119,4 +123,6 @@ export const Product: FC<IProductProps> = (props) => {
       </Card>
     </div>
   )
-}
+})
+
+export const Product = motion(ProductComponent)
