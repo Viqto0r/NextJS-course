@@ -181,17 +181,11 @@
   border-bottom: 1px dashed #c4c4c4;
 }
 
-.reviews {
+.reviewsWrapper {
   overflow: hidden;
-
-  max-height: 0;
-  padding: 0;
 }
 
-.opened {
-  overflow: visible;
-
-  max-height: 100%;
+.reviews {
   margin-top: -10px;
   padding: 30px;
 }

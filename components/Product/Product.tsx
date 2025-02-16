@@ -27,6 +27,11 @@ const ProductComponent: FC<IProductProps> = forwardRef<
     reviewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
+  const variants = {
+    visible: { height: 'auto', opacity: 1 },
+    hidden: { height: 0, opacity: 0 },
+  }
+
   return (
     <div className={className} {...restProps} ref={ref}>
       <Card className={styles.product} color="white">
@@ -108,19 +113,22 @@ const ProductComponent: FC<IProductProps> = forwardRef<
           </Button>
         </div>
       </Card>
-      <Card
-        color="blue"
-        className={cn(styles.reviews, { [styles.opened]: isReviewOpened })}
-        ref={reviewRef}
+      <motion.div
+        className={styles.reviewsWrapper}
+        variants={variants}
+        initial={'hidden'}
+        animate={isReviewOpened ? 'visible' : 'hidden'}
       >
-        {product.reviews.map((review) => (
-          <div key={review._id}>
-            <Review review={review} />
-            <Divider />
-          </div>
-        ))}
-        <ReviewForm productId={product._id} />
-      </Card>
+        <Card color="blue" className={styles.reviews} ref={reviewRef}>
+          {product.reviews.map((review) => (
+            <div key={review._id}>
+              <Review review={review} />
+              <Divider />
+            </div>
+          ))}
+          <ReviewForm productId={product._id} />
+        </Card>
+      </motion.div>
     </div>
   )
 })
