@@ -1,8 +1,8 @@
 import { FC, useEffect } from 'react'
 import styles from './Up.module.css'
-import UpIcon from './up.svg'
 import { useScrollY } from '../../hooks/useScrollY'
 import { motion, useAnimation } from 'framer-motion'
+import { ButtonIcon } from '../ButtonIcon/ButtonIcon'
 
 export const Up: FC = () => {
   const scrollY = useScrollY()
@@ -17,13 +17,12 @@ export const Up: FC = () => {
   }
 
   return (
-    <motion.button
+    <motion.div
       animate={controls}
       initial={{ opacity: 0 }}
       className={styles.up}
-      onClick={scrollToTop}
     >
-      <UpIcon />
-    </motion.button>
+      <ButtonIcon appearance="white" icon="up" onClick={scrollToTop} />
+    </motion.div>
   )
 }

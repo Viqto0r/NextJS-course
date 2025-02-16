@@ -10,10 +10,5 @@
 
   border: none;
   border-radius: 10px;
-  background: var(--primary);
   box-shadow: 0 4px 4px 0 #0000000d;
-}
-
-.up:hover {
-  background: var(--primary-hover);
 }
