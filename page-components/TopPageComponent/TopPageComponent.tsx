@@ -1,4 +1,4 @@
-import { FC, useReducer } from 'react'
+import { FC, useEffect, useReducer } from 'react'
 import styles from './TopPageComponent.module.css'
 import { ITopPageComponentProps } from './TopPageComponent.props'
 import { Advantages, H, Product, Sort, Tag } from '../../components'
@@ -19,6 +19,10 @@ export const TopPageComponent: FC<ITopPageComponentProps> = ({
       products,
     }
   )
+
+  useEffect(() => {
+    dispatchSort({ type: 'reset', initialState: products })
+  }, [products])
 
   const setSort = (sortType: ESortType) => dispatchSort({ type: sortType })
 
