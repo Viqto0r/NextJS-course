@@ -12,6 +12,7 @@ import { firstLevelMenu } from '../../helpers/helpers'
 import { TopPageComponent } from '../../page-components'
 import { API } from '../../helpers/api'
 import Head from 'next/head'
+import { Error404 } from '../404'
 
 interface ITopPageProps extends Record<string, unknown> {
   menu: IMenuItem[]
@@ -103,6 +104,10 @@ function TopPage({
   page,
   products,
 }: ITopPageProps): JSX.Element {
+  if (!page || !products) {
+    return <Error404 />
+  }
+
   return (
     <>
       <Head>
