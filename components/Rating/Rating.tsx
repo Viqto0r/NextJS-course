@@ -51,6 +51,12 @@ export const Rating = forwardRef<HTMLDivElement, IRatingProps>((props, ref) => {
         onKeyDown={handleKeyDown}
         ref={(ref) => ratingArrayRef.current?.push(ref)}
         tabIndex={computeFocus(rating, idx)}
+        role={isEditable ? 'slider' : undefined}
+        aria-valuenow={rating}
+        aria-valuemin={1}
+        aria-valuemax={5}
+        aria-label={isEditable ? 'Укажите рейтинг' : 'рейтинг' + rating}
+        aria-invalid={!!error}
       >
         <StarIcon />
       </span>

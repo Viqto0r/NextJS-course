@@ -121,6 +121,7 @@ const ProductComponent: FC<IProductProps> = forwardRef<
             appearance="ghost"
             arrow={isReviewOpened ? 'down' : 'right'}
             onClick={() => setIsReviewOpened((prev) => !prev)}
+            aria-expanded={isReviewOpened}
           >
             {isReviewOpened ? 'Скрыть отзывы' : 'Читать отзывы'}
           </Button>

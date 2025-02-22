@@ -23,6 +23,7 @@ export const ReviewForm: FC<IReviewFormProps> = ({
     control,
     handleSubmit,
     reset,
+    clearErrors,
     formState: { errors },
   } = useForm<IReviewForm>()
   const [isSuccess, setIsSuccess] = useState(false)
@@ -58,6 +59,7 @@ export const ReviewForm: FC<IReviewFormProps> = ({
           error={errors.name}
           placeholder="Имя"
           tabIndex={tabIndex}
+          aria-invalid={!!errors.name}
         />
         <Input
           {...register('title', {
@@ -67,6 +69,7 @@ export const ReviewForm: FC<IReviewFormProps> = ({
           placeholder="Заголовок отзыва"
           className={styles.title}
           tabIndex={tabIndex}
+          aria-invalid={!!errors.title}
         />
         <div className={styles.rating}>
           <span>Оценка:</span>
@@ -94,9 +97,15 @@ export const ReviewForm: FC<IReviewFormProps> = ({
           className={styles.description}
           error={errors.description}
           tabIndex={tabIndex}
+          aria-label="Текст отзыва"
+          aria-invalid={!!errors.description}
         />
         <div className={styles.submit}>
-          <Button appearance="primary" tabIndex={tabIndex}>
+          <Button
+            appearance="primary"
+            tabIndex={tabIndex}
+            onClick={() => clearErrors()}
+          >
             Отправить
           </Button>
           <span>

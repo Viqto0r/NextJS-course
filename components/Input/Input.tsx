@@ -12,7 +12,11 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
           {...restProps}
           ref={ref}
         />
-        {error && <span className={styles.errorMessage}>{error.message}</span>}
+        {error && (
+          <span role="alert" className={styles.errorMessage}>
+            {error.message}
+          </span>
+        )}
       </div>
     )
   }
