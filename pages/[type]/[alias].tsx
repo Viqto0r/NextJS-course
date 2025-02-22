@@ -11,6 +11,7 @@ import { IProductModel } from '../../interfaces/product.interface'
 import { firstLevelMenu } from '../../helpers/helpers'
 import { TopPageComponent } from '../../page-components'
 import { API } from '../../helpers/api'
+import Head from 'next/head'
 
 interface ITopPageProps extends Record<string, unknown> {
   menu: IMenuItem[]
@@ -103,11 +104,20 @@ function TopPage({
   products,
 }: ITopPageProps): JSX.Element {
   return (
-    <TopPageComponent
-      firstCategory={firstCategory}
-      page={page}
-      products={products}
-    />
+    <>
+      <Head>
+        <title>{page.metaTitle}</title>
+        <meta name="description" content={page.metaDescription} />
+        <meta property="og:title" content={page.metaTitle} />
+        <meta property="og:description" content={page.metaDescription} />
+        <meta property="og:type" content="article" />
+      </Head>
+      <TopPageComponent
+        firstCategory={firstCategory}
+        page={page}
+        products={products}
+      />
+    </>
   )
 }
 
