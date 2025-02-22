@@ -15,6 +15,7 @@ import { API } from '../../helpers/api'
 export const ReviewForm: FC<IReviewFormProps> = ({
   className,
   productId,
+  isOpened,
   ...restProps
 }) => {
   const {
@@ -26,6 +27,8 @@ export const ReviewForm: FC<IReviewFormProps> = ({
   } = useForm<IReviewForm>()
   const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
+
+  const tabIndex = isOpened ? 0 : -1
 
   const onSubmit = async (formData: IReviewForm) => {
     try {
@@ -54,6 +57,7 @@ export const ReviewForm: FC<IReviewFormProps> = ({
           })}
           error={errors.name}
           placeholder="Имя"
+          tabIndex={tabIndex}
         />
         <Input
           {...register('title', {
@@ -62,6 +66,7 @@ export const ReviewForm: FC<IReviewFormProps> = ({
           error={errors.title}
           placeholder="Заголовок отзыва"
           className={styles.title}
+          tabIndex={tabIndex}
         />
         <div className={styles.rating}>
           <span>Оценка:</span>
@@ -76,6 +81,7 @@ export const ReviewForm: FC<IReviewFormProps> = ({
                 setRating={field.onChange}
                 error={errors.rating}
                 ref={field.ref}
+                tabIndex={tabIndex}
               />
             )}
           />
@@ -87,9 +93,12 @@ export const ReviewForm: FC<IReviewFormProps> = ({
           placeholder="Текст отзыва"
           className={styles.description}
           error={errors.description}
+          tabIndex={tabIndex}
         />
         <div className={styles.submit}>
-          <Button appearance="primary">Отправить</Button>
+          <Button appearance="primary" tabIndex={tabIndex}>
+            Отправить
+          </Button>
           <span>
             * Перед публикацией отзыв пройдет предварительную модерацию и
             проверку

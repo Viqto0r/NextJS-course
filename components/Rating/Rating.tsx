@@ -1,18 +1,42 @@
-import { forwardRef, KeyboardEvent, useEffect, useState } from 'react'
+import { forwardRef, KeyboardEvent, useEffect, useRef, useState } from 'react'
 import cn from 'classnames'
 import { IRatingProps } from './Rating.props'
 import StarIcon from './Star.svg'
 import styles from './Rating.module.css'
 
 export const Rating = forwardRef<HTMLDivElement, IRatingProps>((props, ref) => {
-  const { rating, setRating, isEditable = false, error, ...restProps } = props
+  const {
+    rating,
+    setRating,
+    isEditable = false,
+    error,
+    tabIndex,
+    ...restProps
+  } = props
   const [ratingArray, setRatingArray] = useState<JSX.Element[]>(
     new Array(5).fill(<></>)
   )
+  const ratingArrayRef = useRef<(HTMLSpanElement | null)[]>([])
 
   useEffect(() => {
     constructRating(rating)
-  }, [rating])
+  }, [rating, tabIndex])
+
+  const computeFocus = (rating: number, idx: number) => {
+    if (!isEditable) {
+      return -1
+    }
+
+    if (!rating && idx === 0) {
+      return tabIndex ?? 0
+    }
+
+    if (rating === idx + 1) {
+      return tabIndex ?? 0
+    }
+
+    return -1
+  }
 
   const constructRating = (currentRating: number) => {
     const updatedArray = ratingArray.map((_: JSX.Element, idx: number) => (
@@ -24,13 +48,11 @@ export const Rating = forwardRef<HTMLDivElement, IRatingProps>((props, ref) => {
         onMouseEnter={() => changeDisplay(idx + 1)}
         onMouseLeave={() => changeDisplay(rating)}
         onClick={() => onClick(idx + 1)}
+        onKeyDown={handleKeyDown}
+        ref={(ref) => ratingArrayRef.current?.push(ref)}
+        tabIndex={computeFocus(rating, idx)}
       >
-        <StarIcon
-          tabIndex={isEditable ? 0 : -1}
-          onKeyDown={(e: KeyboardEvent<SVGAElement>) =>
-            isEditable && handleSpace(idx + 1, e)
-          }
-        />
+        <StarIcon />
       </span>
     ))
 
@@ -53,12 +75,35 @@ export const Rating = forwardRef<HTMLDivElement, IRatingProps>((props, ref) => {
     setRating?.(idx)
   }
 
-  const handleSpace = (idx: number, e: KeyboardEvent<SVGAElement>) => {
-    if (e.code !== 'Space') {
+  const handleKeyDown = (e: KeyboardEvent<HTMLSpanElement>) => {
+    if (!isEditable || !setRating) {
       return
     }
 
-    setRating?.(idx)
+    if (e.code === 'ArrowRight' || e.code === 'ArrowUp') {
+      e.preventDefault()
+
+      setRating((rating) => {
+        if (!rating) {
+          return 1
+        }
+
+        if (rating === 5) {
+          return 5
+        }
+
+        return rating + 1
+      })
+
+      ratingArrayRef.current[rating]?.focus()
+    }
+
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowDown') {
+      e.preventDefault()
+      setRating((rating) => (rating > 0 ? rating - 1 : 0))
+
+      ratingArrayRef.current[rating - 2]?.focus()
+    }
   }
 
   return (

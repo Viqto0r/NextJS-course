@@ -25,6 +25,7 @@ const ProductComponent: FC<IProductProps> = forwardRef<
   const scrollToReview = () => {
     setIsReviewOpened(true)
     reviewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    queueMicrotask(() => reviewRef.current?.focus())
   }
 
   const variants = {
@@ -119,14 +120,19 @@ const ProductComponent: FC<IProductProps> = forwardRef<
         initial={'hidden'}
         animate={isReviewOpened ? 'visible' : 'hidden'}
       >
-        <Card color="blue" className={styles.reviews} ref={reviewRef}>
+        <Card
+          color="blue"
+          className={styles.reviews}
+          ref={reviewRef}
+          tabIndex={isReviewOpened ? 0 : -1}
+        >
           {product.reviews.map((review) => (
             <div key={review._id}>
               <Review review={review} />
               <Divider />
             </div>
           ))}
-          <ReviewForm productId={product._id} />
+          <ReviewForm productId={product._id} isOpened={isReviewOpened} />
         </Card>
       </motion.div>
     </div>
