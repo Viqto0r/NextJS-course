@@ -46,18 +46,26 @@ const ProductComponent: FC<IProductProps> = forwardRef<
         </div>
         <div className={styles.title}>{product.title}</div>
         <div className={styles.price}>
-          {getPriceRu(product.price)}
+          <span>
+            <span className="visuallyHidden">цена</span>
+            {getPriceRu(product.price)}
+          </span>
           {product.oldPrice && (
             <Tag color="green" className={styles.discount}>
+              <span className="visuallyHidden">скидка</span>
               {getPriceRu(product.price - product.oldPrice)}
             </Tag>
           )}
         </div>
         <div className={styles.credit}>
+          <span className="visuallyHidden">цена</span>
           {getPriceRu(product.credit)}
           <span className={styles.month}>/мес</span>
         </div>
         <div className={styles.rating}>
+          <span className="visuallyHidden">
+            {'рейтинг' + (product.reviewAvg ?? product.initialRating)}
+          </span>
           <Rating rating={product.reviewAvg ?? product.initialRating} />
         </div>
         <div className={styles.tags}>
@@ -67,8 +75,12 @@ const ProductComponent: FC<IProductProps> = forwardRef<
             </Tag>
           ))}
         </div>
-        <div className={styles.priceTitle}>цена</div>
-        <div className={styles.creditTitle}>кредит</div>
+        <div className={styles.priceTitle} aria-hidden={true}>
+          цена
+        </div>
+        <div className={styles.creditTitle} aria-hidden={true}>
+          кредит
+        </div>
         <div className={styles.rateTitle}>
           <a href="#ref" onClick={scrollToReview}>
             {product.reviewCount}{' '}
