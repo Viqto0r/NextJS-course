@@ -147,5 +147,9 @@ export const Menu: FC = () => {
     })
   }
 
-  return <menu className={styles.menu}>{buildFirstLevel()}</menu>
+  return (
+    <nav className={styles.menu} role="navigation">
+      {buildFirstLevel()}
+    </nav>
+  )
 }

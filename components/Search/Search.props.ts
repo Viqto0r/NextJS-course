@@ -1,3 +1,3 @@
 import { HTMLAttributes } from 'react'
 
-export interface ISearchProps extends HTMLAttributes<HTMLDivElement> {}
+export interface ISearchProps extends HTMLAttributes<HTMLFormElement> {}
