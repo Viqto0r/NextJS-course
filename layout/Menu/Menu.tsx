@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react'
+import { FC, KeyboardEvent, useContext } from 'react'
 import styles from './Menu.module.css'
 import { AppContext } from '../../context/app.context'
 import { IFirstLevelMenuItem, IPageItem } from '../../interfaces/menu.interface'
@@ -43,6 +43,13 @@ export const Menu: FC = () => {
     setMenu?.(updatedMenu)
   }
 
+  const openSecondLevelKey = (e: KeyboardEvent, category: string) => {
+    if (e.code === 'Enter' || e.code === 'Space') {
+      e.preventDefault()
+      openSecondLevel(category)
+    }
+  }
+
   const buildFirstLevel = () => {
     return firstLevelMenu.map((firstLevelMenuItem) => {
       const firstLevelActive = firstLevelMenuItem.id === firstCategory
@@ -80,23 +87,32 @@ export const Menu: FC = () => {
           }
 
           const { secondCategory } = menuItem._id
+          const { isOpened = false } = menuItem
 
           return (
             <div key={secondCategory}>
               <div
+                tabIndex={0}
                 className={styles.secondLevel}
                 onClick={() => openSecondLevel(secondCategory)}
+                onKeyDown={(e: KeyboardEvent) =>
+                  openSecondLevelKey(e, secondCategory)
+                }
               >
                 {secondCategory}
               </div>
               <motion.div
                 layout
                 variants={variants}
-                initial={menuItem.isOpened ? 'visible' : 'hidden'}
-                animate={menuItem.isOpened ? 'visible' : 'hidden'}
+                initial={isOpened ? 'visible' : 'hidden'}
+                animate={isOpened ? 'visible' : 'hidden'}
                 className={styles.secondLevelBlock}
               >
-                {buildThirdLevel(menuItem.pages, firstLevelMenuItem.route)}
+                {buildThirdLevel(
+                  menuItem.pages,
+                  firstLevelMenuItem.route,
+                  isOpened
+                )}
               </motion.div>
             </div>
           )
@@ -105,7 +121,11 @@ export const Menu: FC = () => {
     )
   }
 
-  const buildThirdLevel = (pages: IPageItem[], route: string) => {
+  const buildThirdLevel = (
+    pages: IPageItem[],
+    route: string,
+    isOpened: boolean
+  ) => {
     return pages.map((page) => {
       const href = `/${route}/${page.alias}`
       const isActive = href === router.asPath
@@ -114,6 +134,7 @@ export const Menu: FC = () => {
         <motion.div key={page._id} variants={variantsChildren}>
           <Link href={href}>
             <a
+              tabIndex={isOpened ? 0 : -1}
               className={cn(styles.thirdLevel, {
                 [styles.thirdLevelActive]: isActive,
               })}
