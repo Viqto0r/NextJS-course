@@ -14,6 +14,10 @@
   margin-right: 8px;
 }
 
+.sortName {
+  display: none;
+}
+
 .sort {
   display: grid;
   grid-template-columns: auto auto;
@@ -22,14 +26,20 @@
   cursor: pointer;
 }
 
-.sort span {
+.sort button {
   display: grid;
   grid-template-columns: 1fr;
 
   align-items: center;
   gap: 8px;
+
+  border: none;
+  background: none;
+
+  font-size: 16px;
+  line-height: 22px;
 }
 
-.sort span.active {
+.sort button.active {
   grid-template-columns: 20px 1fr;
 }

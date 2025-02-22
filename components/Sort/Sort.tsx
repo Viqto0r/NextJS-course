@@ -9,20 +9,29 @@ export const Sort: FC<ISortProps> = (props) => {
 
   return (
     <div className={cn(styles.sort, className)} {...otherProps}>
-      <span
+      <div className={styles.sortName} id="sort">
+        Сортировка
+      </div>
+      <button
+        id="rating"
         className={cn({ [styles.active]: sort === ESortType.Rating })}
         onClick={() => setSort(ESortType.Rating)}
+        aria-selected={sort === ESortType.Rating}
+        aria-labelledby="sort rating"
       >
         <SortIcon className={styles.sortIcon} />
         По рейтингу
-      </span>
-      <span
+      </button>
+      <button
+        id="price"
         className={cn({ [styles.active]: sort === ESortType.Price })}
         onClick={() => setSort(ESortType.Price)}
+        aria-selected={sort === ESortType.Price}
+        aria-labelledby="sort price"
       >
         <SortIcon className={styles.sortIcon} />
         По цене
-      </span>
+      </button>
     </div>
   )
 }

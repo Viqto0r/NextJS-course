@@ -30,7 +30,11 @@ export const TopPageComponent: FC<ITopPageComponentProps> = ({
     <div>
       <div className={styles.title}>
         <H tag="h1">{page.title}</H>
-        {sortedProducts && <Tag color="gray">{sortedProducts.length}</Tag>}
+        {sortedProducts && (
+          <Tag color="gray" aria-label={sortedProducts.length + 'элементов'}>
+            {sortedProducts.length}
+          </Tag>
+        )}
         <Sort sort={sort} setSort={setSort} />
       </div>
       <div>

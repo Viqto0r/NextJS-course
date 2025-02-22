@@ -39,6 +39,7 @@ export const Search: FC<ISearchProps> = ({ className, ...restProps }) => {
         className={styles.button}
         appearance="primary"
         onClick={goToSearch}
+        aria-label="Искать по сайту"
       >
         <GlassIcon />
       </Button>
