@@ -4,13 +4,14 @@ import styles from './Header.module.css'
 import cn from 'classnames'
 import Logo from '../logo.svg'
 import { ButtonIcon } from '../../components'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Sidebar } from '../Sidebar/Sidebar'
 import { useRouter } from 'next/router'
 
 export const Header: FC<IHeaderProps> = ({ className, ...props }) => {
   const [isOpened, setIsOpened] = useState(false)
   const router = useRouter()
+  const shouldReduceMotion = useReducedMotion()
 
   useEffect(() => {
     setIsOpened(false)
@@ -25,7 +26,7 @@ export const Header: FC<IHeaderProps> = ({ className, ...props }) => {
       },
     },
     closed: {
-      opacity: 0,
+      opacity: shouldReduceMotion ? 1 : 0,
       x: '100%',
     },
   }

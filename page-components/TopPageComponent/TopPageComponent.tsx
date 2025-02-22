@@ -6,6 +6,7 @@ import { HHData } from '../../components/HHData/HHData'
 import { ETopLevelCategory } from '../../interfaces/page.interface'
 import { ESortType } from '../../components/Sort/Sort.props'
 import { sortReducer } from './sort.reducer'
+import { useReducedMotion } from 'framer-motion'
 
 export const TopPageComponent: FC<ITopPageComponentProps> = ({
   firstCategory,
@@ -19,6 +20,7 @@ export const TopPageComponent: FC<ITopPageComponentProps> = ({
       products,
     }
   )
+  const shouldReduceMotion = useReducedMotion()
 
   useEffect(() => {
     dispatchSort({ type: 'reset', initialState: products })
@@ -39,7 +41,12 @@ export const TopPageComponent: FC<ITopPageComponentProps> = ({
       </div>
       <div role="list">
         {sortedProducts?.map((product) => (
-          <Product layout key={product._id} product={product} role="listitem" />
+          <Product
+            layout={!shouldReduceMotion}
+            key={product._id}
+            product={product}
+            role="listitem"
+          />
         ))}
       </div>
       <div className={styles.hhTitle}>
