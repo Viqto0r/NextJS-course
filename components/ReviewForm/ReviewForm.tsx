@@ -11,6 +11,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { IReviewForm, IReviewSentResponse } from './ReviewForm.interface'
 import axios from 'axios'
 import { API } from '../../helpers/api'
+import { ButtonIcon } from '../ButtonIcon/ButtonIcon'
 
 export const ReviewForm: FC<IReviewFormProps> = ({
   className,
@@ -115,22 +116,28 @@ export const ReviewForm: FC<IReviewFormProps> = ({
         </div>
       </div>
       {isSuccess && (
-        <div className={cn(styles.panel, styles.success)}>
+        <div className={cn(styles.panel, styles.success)} role="alert">
           <div className={styles.successTitle}>Ваш отзыв отправлен</div>
           <div>Спасибо, ваш отзыв будет опубликован после проверки.</div>
-          <CloseIcon
+          <button
             className={styles.close}
             onClick={() => setIsSuccess(false)}
-          />
+            aria-label="Закрыть уведомление"
+          >
+            <CloseIcon />
+          </button>
         </div>
       )}
       {isError && (
-        <div className={cn(styles.panel, styles.error)}>
-          Что-то пошло не так, попробуйте обновить страницу onClick=
-          <CloseIcon
-            className={styles.close}
+        <div className={cn(styles.panel, styles.error)} role="alert">
+          Что-то пошло не так, попробуйте обновить страницу
+          <button
             onClick={() => setIsError(false)}
-          />
+            className={styles.close}
+            aria-label="Закрыть уведомление"
+          >
+            <CloseIcon />
+          </button>
         </div>
       )}
     </form>

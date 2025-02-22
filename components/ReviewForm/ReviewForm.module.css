@@ -59,7 +59,10 @@
   top: 15px;
   right: 15px;
 
-  cursor: pointer;
+  padding: 0;
+
+  border: none;
+  background: none;
 }
 
 .error {
